@@ -1,0 +1,19 @@
+[package]
+name = "dyncollections"
+version = "0.1.0"
+edition = "2021"
+authors = ["ModernType <antonaw2004@gmail.com>"]
+description = "This library provides a bunch of collections to store trait objects and retrive concrete types from them"
+readme = "README.md"
+license = "MIT"
+keywords = ["collections", "dyn", "type-erasure"]
+categories = ["data-structures"]
+
+[lib]
+crate-type = ["lib"]
+
+[dependencies]
+
+[features]
+default = ["impl_std"]
+impl_std = []
