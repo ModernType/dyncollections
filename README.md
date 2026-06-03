@@ -67,3 +67,7 @@ assert_eq!(messages, vec!["Hello", "World"]);
 ## Other collections
 
 Except for `DynSet`, `dyncollections` also provides `OrdDynMap` and `HashDynMap` which act similarly to their standard library counterparts except that they use similar mechanism to retrieve back type data from trait objects.
+
+## Features
+
+- `impl_std` (*enabled by default*) - implements inner `MakeConcrete<T>` trait for a bunch of standard library types

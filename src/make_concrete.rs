@@ -56,25 +56,6 @@ macro_rules! dynamify {
     };
 }
 
-// #[macro_export]
-// macro_rules! dynamify {
-//     (
-//         $pa:path
-//         $([$($gen:ident),+])?
-//         $(where $( $gen_bound:ident : $($bounds:tt)+ ),+)?
-//     ) => {
-//         impl<MakeConcreteType $( $(, $gen )+)?> $crate::make_concrete::MakeConcrete<MakeConcreteType> for dyn $pa
-//         where
-//             MakeConcreteType: $pa + 'static,
-//             $($($gen_bound : $($bounds)+),+)?
-//         {
-//             fn from_concrete(value: MakeConcreteType) -> Box<Self> {
-//                 Box::new(value) as Box<Self>
-//             }
-//         }
-//     };
-// }
-
 #[cfg(test)]
 mod test {
     trait Simple {}
@@ -89,4 +70,35 @@ mod test {
     {
     }
     dynamify!(AssociatedWithBounds where T: std::fmt::Display);
+}
+
+#[cfg(feature = "impl_std")]
+mod std_impl {
+    use std::any::Any;
+    use std::borrow::{Borrow, BorrowMut};
+    use std::error::Error;
+    use std::fmt::{
+        Binary, Debug, Display, LowerExp, LowerHex, Octal, Pointer, UpperExp, UpperHex,
+        Write as FmtWrite,
+    };
+    use std::io::{Read, Seek, Write};
+
+    dynamify!(Any);
+    dynamify!(Borrow where T: ?Sized);
+    dynamify!(BorrowMut where T: ?Sized);
+    dynamify!(Error);
+    dynamify!(Debug);
+    dynamify!(Display);
+    dynamify!(Binary);
+    dynamify!(LowerExp);
+    dynamify!(LowerHex);
+    dynamify!(Octal);
+    dynamify!(Pointer);
+    dynamify!(UpperExp);
+    dynamify!(UpperHex);
+    dynamify!(FmtWrite);
+    dynamify!(Write);
+    dynamify!(Read);
+    dynamify!(Seek);
+    dynamify!(ToString);
 }
