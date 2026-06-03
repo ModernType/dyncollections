@@ -8,6 +8,7 @@ readme = "README.md"
 license = "MIT"
 keywords = ["collections", "dyn", "type-erasure"]
 categories = ["data-structures"]
+repository = "https://github.com/ModernType/dyncollections"
 
 [lib]
 crate-type = ["lib"]
