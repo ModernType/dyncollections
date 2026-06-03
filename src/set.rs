@@ -70,14 +70,17 @@ where
         self.inner.iter_mut().map(|(_, v)| v)
     }
 
+    /// Returns whether the set is empty (i.e. contains no elements)
     pub fn is_empty(&self) -> bool {
         self.inner.is_empty()
     }
 
+    /// Returns the number of elements in the set
     pub fn len(&self) -> usize {
         self.inner.len()
     }
 
+    /// Removes the element with the given key from the set, returning its concrete type value if found
     pub fn remove<T>(&mut self, key: &DynKey<T>) -> Option<Box<T>>
     where
         DynT: MakeConcrete<T>,
@@ -85,10 +88,12 @@ where
         self.inner.remove(key)
     }
 
+    /// Removes the element with the given id from the set, returning corresponding trait object
     pub fn remove_dyn(&mut self, id: usize) -> Option<Box<DynT>> {
         self.inner.remove_dyn(&id)
     }
 
+    /// Removes all elements from the set
     pub fn clear(&mut self) {
         self.inner.clear();
     }

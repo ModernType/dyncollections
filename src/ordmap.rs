@@ -94,14 +94,17 @@ where
         self.inner.iter_mut()
     }
 
+    /// Returns whether the map is empty (i.e. contains no elements)
     pub fn is_empty(&self) -> bool {
         self.inner.is_empty()
     }
 
+    /// Returns the number of elements in the map
     pub fn len(&self) -> usize {
         self.inner.len()
     }
 
+    /// Removes the element with the given key from the map, returning its concrete type value if found
     pub fn remove<T>(&mut self, key: &DynKey<K, T>) -> Option<Box<T>>
     where
         DynT: MakeConcrete<T>,
@@ -115,14 +118,17 @@ where
         }
     }
 
+    /// Removes the element with the given key from the map, returning corresponding trait object
     pub fn remove_dyn(&mut self, key: &K) -> Option<Box<DynT>> {
         self.inner.remove(key)
     }
 
+    /// Removes all elements from the map
     pub fn clear(&mut self) {
         self.inner.clear();
     }
 
+    /// Returns whether the map contains an element with the given key
     pub fn contains_key(&self, key: &K) -> bool {
         self.inner.contains_key(key)
     }

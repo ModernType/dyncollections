@@ -1,10 +1,12 @@
 /// Trait used to identify how to convert between `dyn Trait` and concrete types which implement it. Basically you shouldn't implement this trait by hand, use [`dinamify!()`] macro instead.
 pub trait MakeConcrete<T> {
     unsafe fn as_concrete(&self) -> &T {
+        // Implementation is inspired by implementation of `Any::downcast_ref_unchecked()`
         unsafe { &*(self as *const Self as *const T) }
     }
 
     unsafe fn as_concrete_mut(&mut self) -> &mut T {
+        // Implementation is inspired by implementation of `Any::downcast_mut_unchecked()`
         unsafe { &mut *(self as *mut Self as *mut T) }
     }
 
